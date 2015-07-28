@@ -1,0 +1,12 @@
+status: 200
+content-location: http://api.openweathermap.org/data/2.5/weather?q=newyork, USA
+x-source: redis
+server: nginx
+connection: keep-alive
+access-control-allow-credentials: true
+date: Sun, 26 Jul 2015 21:14:18 GMT
+access-control-allow-origin: *
+access-control-allow-methods: GET, POST
+content-type: application/json; charset=utf-8
+
+{"coord":{"lon":-74.01,"lat":40.71},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],"base":"cmc stations","main":{"temp":302.98,"pressure":1014,"humidity":43,"temp_min":300.15,"temp_max":306.15},"wind":{"speed":7.2,"deg":210,"gust":11.3},"clouds":{"all":75},"dt":1437944616,"sys":{"type":1,"id":1975,"message":0.0129,"country":"US","sunrise":1437904060,"sunset":1437956213},"id":5128581,"name":"New York","cod":200}

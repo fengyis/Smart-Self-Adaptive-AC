@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Internet of Things: Smart Self-Adaptive Air Conditioner">
+    <meta name="author" content="Fengyi Song and Lin Su">
+
+    <title>Smart Self-Adaptive AC</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./Carousel Template for Bootstrap_files/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/carousel/carousel.css" rel="stylesheet">
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.3.5.min.js"></script>
+
+
+</head>
+
+<script>
+    Parse.initialize("JxFyNYutkklDBpo2aCdaSsTmaDDRsFpk2h4L5Ewb", "AJC0OzLmMarZEwuGxsX4ymxIGwrqakRQerrC16PM");
+
+    function getInfo() {
+      var Bulb = Parse.Object.extend("WorkObject");
+      var query = new Parse.Query(Bulb);
+      var bulb = new Bulb();
+      query.get("mR8AWQdHL3", {
+        success: function(bulb) {
+          var toutdoor = bulb.get("Toutdoor");
+          var tindoor = bulb.get("Tindoor");
+          var flowRate = bulb.get("FlowRate");
+          var tsetting = bulb.get("Tsetting");
+          var pWork = bulb.get("Pwork");
+          var level = bulb.get("Level");
+          var consumption = bulb.get("Consumption");
+
+          // Update Bulb Intensity
+          document.getElementById("toutdoor").innerHTML = toutdoor;
+          document.getElementById("tindoor").innerHTML = tindoor;
+          document.getElementById("flowRate").innerHTML = flowRate;
+          document.getElementById("tsetting").innerHTML = tsetting;
+          document.getElementById("pWork").innerHTML = pWork;
+          document.getElementById("level").innerHTML = level;
+          document.getElementById("consumption").innerHTML = consumption;
+
+        },
+        error: function(object, error) {
+          // The object was not retrieved successfully.
+          // error is a Parse.Error with an error code and message.
+        }
+      });
+    }
+
+</script>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Smart Self-Adaptive AC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#introduction">Introduction</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#existing">Existing Work</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#features">Features</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#description">Description</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#results">Results</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#demo">Video</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Smart Self-Adaptive AC</h1>
+            <h3>IoT Course Project</h3>  
+            <br>      
+            <a href="#introduction" class="btn btn-dark btn-lg">Get started</a>
+        </div>
+    </header>
+
+    
+
+
+    <!-- Introduction -->
+    <section id="introduction"> 
+      <!-- Indicators -->
+        <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>Introduction</h2>
+                        <p class="lead">IoT Course Project: Smart Self-Adaptive AC </p>
+                    </div>
+                </div>
+                <!-- /.row -->
+        </div>
+
+      <!-- roll page -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="img/new/intro_page1.jpg" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Smart World</h1>
+              <p>One of the many big themes that came out of CES show was the idea of the smart home. Smart homes was also a key of the larger IoT (Internet of Things) that was prominent throughout CES. The goal of smart homes is to equip the traditional appliance with intelligence which provides with people the best convenience.</p>
+              <br><br><br><br>
+            </div>
+            
+          </div>
+        </div>
+        <div class="item">
+          <img class="second-slide" src="img/new/intro_page2.jpg" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Smart Life</h1>
+              <p>This project is called SSA (Smart Self-Adaptive AC), which is designed to optimize current existing air conditioner to provide the best utilization of power consumption and make it self-adaptive to the dynamical factors while guaranteeing users’ best feelings.</p>
+              <br><br><br><br><br>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="third-slide" src="img/new/intro_page3.jpg" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Smart AC</h1>
+              <p>The smart air conditioner would automatically adjust the setting temperature and real time working power according to four factors: weather, indoor temperature, people’s flow and user’s preference. These data are first stored in the cloud, and then a reasonable algorithm is applied to calculate the optimal temperature, the necessary working power and output its state synchronously. The state of the air conditioner and the electricity consumption are also recorded in the cloud, which can be further used for analysis of user’s long-term preference or the power saving program.</p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!-- /.carousel -->
+
+    </section><!-- /.carousel -->
+
+    <!-- Existing work Grid Section -->
+    <section id="existing">
+        <div id="portfolio" class="bg-light-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Existing Work</h2>
+                        <h3 class="section-subheading text-muted"></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 portfolio-item">
+                        <div class="portfolio-caption">
+                            <img src="img/new/AC1.png" class="img-responsive" alt="">
+                            <p class="text-muted"> <a href="http://www.lg-dfs.com/smartac.aspx">LG Smart AC</a> </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 col-sm-6 portfolio-item">
+                        <div class="portfolio-caption">
+                            <img src="img/new/AC2.png" class="img-responsive" alt="">
+                            <p class="text-muted"> <a href="https://www.quirky.com/invent/244090">Aros</a> </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 portfolio-item">
+                        <div class="portfolio-caption">
+                            <img src="img/new/AC3.png" class="img-responsive" alt="">
+                            <p class="text-muted"> <a href="http://www.samsungcc.com.au/samsung-smart-air-conditioning-systems">Samsung Smart Air Conditioner</a> </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-12 text-center">
+                    <a href="#ModalExist" class="btn btn-primary portfolio-link"  data-toggle="modal">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Features -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="features">
+        <div class="container services bg-primary">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>Features</h2>
+                    <hr class="small">
+                    <br><br>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-lightbulb-o fa-stack-1x text-primary"></i>
+                                </span>
+                                <h4>
+                                    <strong>Power saving & Efficiency</strong>
+                                    <br>
+                                </h4>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-soundcloud fa-stack-1x text-primary"></i>
+                                </span>
+                                <h4>
+                                    <strong>Weather API</strong>
+                                    <br>
+                                </h4>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-cloud-upload fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Cloud Storage & Setting Suggestion</strong>
+                                </h4>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.row (nested) -->
+                    <br><br>
+                    <a href="#ModalFeatures" class="btn btn-light portfolio-link" data-toggle="modal">Learn More</a>
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+
+    <!-- Description Grid Section -->
+    <section id="description">
+        <div id="portfolio" class="bg-light-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Detailed Description</h2>
+                        <h3 class="section-subheading text-muted"></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 portfolio-item">
+                        <a href="#ModalProcess" class="portfolio-link" data-toggle="modal">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img src="img/new/diagram.jpg" class="img-responsive" alt="">
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>Process Flow</h4>
+                            <p class="text-muted"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-sm-6 portfolio-item">
+                        <a href="#ModalCompnonets" class="portfolio-link" data-toggle="modal">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img src="img/new/component.jpg" class="img-responsive" alt="">
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>Components</h4>
+                            <p class="text-muted"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results & Conclusion Grid Section -->
+    <section id="results">
+        <div id="portfolio" class="bg-light-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Results</h2>
+                        <h3 class="section-subheading text-muted"></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 portfolio-item">
+                        <a href="#ModalResults" class="portfolio-link" data-toggle="modal">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img src="img/new/results.jpg" class="img-responsive" alt="">
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>Results & Conclusion</h4>
+                            <p class="text-muted"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 portfolio-item">
+                        <a href="#ModalFuture" class="portfolio-link" data-toggle="modal">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <img src="img/new/future.jpg" class="img-responsive" alt="">
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>Future Work & Appendix</h4>
+                            <p class="text-muted"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Demo video-->
+    <section id="demo">
+        <div id="portfolio" class="bg-light-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <div>
+                            <h2 class="section-heading">Video</h2>
+                            <iframe width="750" height="600" src="https://www.youtube.com/embed/RK-shb7zcxM"></iframe>
+                            <!-- <iframe width="750" height="600" src="https://www.youtube.com/embed/fuLxyk1H1QI"></iframe> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Call to Action -->
+
+
+    <!-- Footer -->
+    <footer>
+        <section id="contact" class="call-to-action bg-primary">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1 text-center">
+                        <div class="row">
+                            <div class="text-center col-md-6">
+                                <h4><strong>Fengyi Song</strong>
+                                </h4>
+                                <p>Columbia University<br>UNI: fs2523</p>   
+                                <i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:fs2523@columbia.edu">fs2523@columbia.edu</a>
+                            </div>
+                            <div class="text-center col-md-6">
+                                <h4><strong>Lin Su</strong>
+                                </h4>
+                                <p>Columbia University<br>UNI: ls3201</p>
+                                <i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:ls3201@columbia.edu">ls3201@columbia.edu</a>
+                            </div>
+                        </div>
+                        <br>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-github fa-fw fa-3x"></i></a>
+                            </li>
+                        </ul>
+
+                        <hr class="small">
+                        <p class="text-muted">EECS6765 Internet of Things<br>Electrical Engineering     Columbia University</p>
+                    </div>
+                </div>
+            </div>
+        </senction>
+    </footer>
+
+    <!-- Portfolio Modals -->
+    <!-- Use the modals below to showcase details about your portfolio projects! -->
+
+    <!-- Modal: Features -->
+    <div class="portfolio-modal modal fade" id="ModalFeatures" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Features</h2>
+                            <p class="item-intro text-muted"></p>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <span class="fa-stack fa-4x">
+                                            <i class="fa fa-lightbulb-o fa-stack-1x text-primary"></i>
+                                        </span>
+                                    </div>
+                                
+                                    <div class="col-lg-9">
+                                        <p class="text-justify text-muted">The first feature is that Smart Self-Adaptive AC (SSA) increases the power efficiency and saves electricity in people’s daily life. The SSA could periodically estimate the number of people staying in the room by enabling Bluetooth discovery. Basically, SSA has a Bluetooth Dongle which could search the amount of Bluetooth devices and thereby estimate the people’s flow at a certain time. If there are less people than expected or even no person staying, the SSA will decrease its power and lower the fan speed.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <span class="fa-stack fa-4x">
+                                            <i class="fa fa-soundcloud fa-stack-1x text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <br>
+                                        <p class="text-justify text-muted">The real artificial intelligence is not only the smart functionality but also in freeing people from manually control. The SSA takes the current weather into account when calculating the most comfortable temperature zone. This would enable people get rid of controlling the air conditioner rather than adjust the setting temperature repeatedly. </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <span class="fa-stack fa-4x">
+                                            <i class="fa fa-cloud-upload fa-stack-1x text-primary"></i>
+                                        </span>
+                                    </div>
+                             
+                                    <div class="col-lg-9">
+                                        <br>
+                                        <p class="text-justify text-muted">In addition, all of the data are stored in Parse, which is a cloud database provided by Facebook. Also, the algorithms and calculations are all implemented on cloud to save power and simplify the real physical architecture.</p>
+                                    </div>
+                                </div>
+                            
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Exist -->
+    <div class="portfolio-modal modal fade" id="ModalExist" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Existing Work</h2>
+                            <p class="item-intro text-muted"></p>
+                            <p class="text-justify">There are multiple prototypes of smart air conditioner in the market. The most popular and common used function among them is remote control. For example, LG Smart Air Conditioner is controlled by a free smart phone app through wireless device [1]. Similarly, tado smart AC control device can control AC by using a combination of infrared and Wi-Fi. On the one side, tado uses IR to control AC, on the other side, tado uses Wifi to hop on to the Internet to communicate with your smartphone [2].</p>
+                            <p class="text-justify">Besides the remote control function, there are also other fantastic features of smart AC. Aros Smart AC produced by the cooperation of GE and Quirky have a distinguished features of GPS tracking and budget suggestion [3]. The Samsung Smart Air Conditioner provides a specific set of cooling and heating settings that can be based on current weather conditions and the number of people in the room [4].</p>
+                            
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Description 1 Process Flow -->
+    <div class="portfolio-modal modal fade" id="ModalProcess" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Process Flow</h2>
+                            <p class="item-intro text-muted"></p>
+                            <img class="img-responsive img-centered" src="img/new/flowDiagram.png" alt="">
+                            <p class="text-justify">Figure above provides a general flow chart of SSA which further illustrate the functionality. From the left hand side are the inputs to the system. Indoor temperature is caught by a temperature sensor and passed on the Parse through http protocol. The weather condition is obtained from weather API and will also be stored in the cloud. People’s flow(activities) as mentioned before will be detected and estimated through Bluetooth device. Some reasonable algorithms will be applied on the cloud. For example, a negative feedback loop resembles the function of a thermostat.  After a series of cloud computation, an appropriate setting temperature and working power will be sent to the smart vents.</p>
+                            <p class="text-justify">This project employs smart vents sponsored by Keen Home. Since a real air conditioner requires a much higher industrial process, our team aims to adjust the fan angel to simulate the working power and fan speed. For example, a fan angle of 90 degree means both the working power and fan speed reach its highest situation. A fan angle of 0 degree means the current status is OFF. The smart vents receive the signal from cloud through the Smart Things Hub and respond to the corresponding command.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Description 2 Compnonets -->
+    <div class="portfolio-modal modal fade" id="ModalCompnonets" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Components</h2>
+                            <p class="item-intro text-muted"></p>
+                           
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img src="img/new/raspberry_pi.jpg">
+                                </div>
+                                <div class="col-lg-8">
+                                    <p class="text-justify text-muted">This project contains raspberry Pi with Bluetooth dongle and WIFI module, Smart Things Hub, Smart Vents and Parse cloud platform. The main program runs in raspberry Pi which incorporates weather API and Bluetooth sensor. The weather information is obtained from open weather map API. The Bluetooth parts could search in both traditional Bluetooth and BLE mode which could be more accurate for wide range. </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <br><br>
+                                    <img src="img/new/hub.png">
+                                </div>
+                                <div class="col-lg-8">
+                                    <p class="text-justify text-muted">The Smart Things Hub is a ZigBee hub from Smart Things. On the one end, it is able to communicate with WIFI and ZigBee signal on the other end. Smart Things company has its own IDE and we are able to construct our own app running on their platform. Specifically, Keen Home has already defined their device type handler on Smart Things platform which could communicate with the hub. We build our own APP which extracts information from the device handler and sends it to Parse through WIFI after a series of processing. This APP could also be deployed on the smart phone which allows people to control their vents more conveniently.</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img src="img/new/vent.png">
+                                </div>
+                                <div class="col-lg-8">
+                                    <p class="text-justify text-muted">The endpoint device is the smart vent from Keen Home. Smart vent has its own microprocessor and ZigBee module to be able to communicate with hub as mentioned before. It is powered by 5 AA batteries and would support the vent for months.</p>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Results -->
+    <div class="portfolio-modal modal fade" id="ModalResults" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Results</h2>
+                            <p class="item-intro text-muted"></p>
+                            <p class="text-justify">There were some potential challenges as stated in our proposal. The first one is the algorithms applied in the cloud. This is resolved through the cloud function. The second one is the way to simulate because of lacking in real devices. Thanks to Keen Home, we are able to get two compatible smart vents to successfully demonstrate our project.</p>
+                            <p class="text-justify">The Smart Self-Adaptive Air Conditioner works as we expected. The weather information is obtained every hour, the indoor temperature will be updated every 3 minutes and the Bluetooth is in every 10 minutes.  This is because we assume that the weather condition varies less often than indoor temperature and Bluetooth somehow consumes more power than sensor.</p>
+                            <p class="text-justify">The power consumption is calculated every 20 minutes. This is also the frequency of invoking cloud functions. </p>
+                            <p class="text-justify">The smart vent is getting signal from Parse in a schedule of every 5 minutes. That is, no matter how the condition changes, the smart vent would be able to adapt in a period of 5 minutes.</p>
+                            <p class="text-justify">Because of the use of Smart Things Hub, our Smart Vent could be controlled by APPs running on smartphones. Users could also adjust the air flow according to their own preference if they want to override the settings from cloud calculations.</p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="img/new/app1.png">
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="img/new/app2.png">
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="img/new/app3.png">
+                                </div>
+                            </div>
+
+
+                            <!--get AC condition info from Parse -->
+                            <br>
+                            <div>
+                                <h2>Information Panel</h2>
+                                <div class="row text-center">
+                                <br><br><br>
+                                    
+                                    <table class="table table-bordered table-hover table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>Weather T(°F)</th>
+                                                <th>Indoor T(°F)</th>
+                                                <th>Flow Rate</th>
+                                                <th>Setting T(°F)</th>
+                                                <th>Power(W)</th>
+                                                <th>Fan Level</th>
+                                                <th>Consumption(kW*h)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="toutdoor"></td>
+                                                <td id="tindoor"></td>
+                                                <td id="flowRate"></td>
+                                                <td id="tsetting"></td>
+                                                <td id="pWork"></td>
+                                                <td id="level"></td>
+                                                <td id="consumption"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row text-center">
+                                    
+
+                                    
+                                    <button type="button" id="own_button" class="btn btn-primary active" onClick="getInfo()">Click Here to get Info</button>
+                                    
+                                </div>
+                            </div>
+
+                            <br>
+                            <h2>Conclusion</h2>
+                            <p class="text-justify">This is a project unifies different platforms as well as different programming languages such as Parse cloud, raspberry Pi, Smart Things groovy IDE and ZigBee signal. There are actually many ways to choose for the communication of each component e.g. Socket, HTTP… Since our cloud platform acts like a central platform, we choose to use HTTP protocol to send and receive information for each device. In addition, power consumption is a critical point in Internet of Things of course. This project could be further developed with much focus on the power.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Future Work -->
+    <div class="portfolio-modal modal fade" id="ModalFuture" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Future Work</h2>
+                            <p class="item-intro text-muted"></p>
+                            <p class="text-justify">Although the SSA incorporate quite a lot features and is able to compete with existing industrial products, it could still be further developed based on the current design. First of all, since the power and electricity usage is recorded on cloud, further analysis could be applied in order to predict and provide more accurate instructions. For example, SSA could be added a mechanism which could be compatible with the DR (Demand Response). Demand response is a tariff or program established to motivate changes in electric use by end-use customers in response to changes in the price of electricity over time, or to give incentive payments designed to induce lower electricity use at times of high market prices or when grid reliability is jeopardized. We could equip the Smart AC with the system that allow customers to monitor the electricity usage and have their AC to response to the DR signal which lower their peak demand and end users would gain benefits from it.</p>
+                            <p class="text-justify">In addition, our team is also thinking about incorporating GPS. This is to enable SSA to detect weather the master has stayed in home or not. This might be useful in auto shutdown when the master forgets to turn the AC OFF.</p>
+
+                            <h2>Reference</h2>
+                            <div class="text-justify">
+                            
+                                <ol>
+                                    <li>“LG Smart AC” <a href="http://www.lg-dfs.com/smartac.aspx">http://www.lg-dfs.com/smartac.aspx</a>
+                                    </li>
+                                    <li>“tado Smart AC Control” <a href="https://www.tado.com/us/">https://www.tado.com/us/</a>
+                                    </li>
+                                    <li>“Aros” <a href="https://www.quirky.com/invent/244090">https://www.quirk.com/invent/244090</a>
+                                    </li>
+                                    <li>“Samsung Smart Air Conditioner” <a href="http://www.samsungcc.com.au/samsung-smart-air-conditioning-systems">http://www.samsungcc.com.au/samsung-smart-air-conditioning-systems</a>
+                                    </li>
+                                    <li>"Parse Documentation" <a href="https://www.parse.com/docs">https://www.parse.com/docs</a>
+                                    </li>
+                                    <li>"SmartThings Documentation" <a href="http://docs.smartthings.com/en/latest/smartapp-developers-guide/index.html">http://docs.smartthings.com/en/latest/smartapp-developers-guide/index.html</a>
+                                    </li>
+                                    <li>"Bootstrap Themes & Templates" <a href="http://startbootstrap.com/template-categories/all/">http://startbootstrap.com/template-categories/all/</a>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <h2>Appendix</h2>
+                            <div class="text-justify">
+                                <ol>
+                                    <li>Source code <a href="https://github.com/fengyis/Smart-Self-Adaptive-AC">https://github.com/fengyis/Smart-Self-Adaptive-AC</a>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <br>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/agency.js"></script>
+
+
+
+</body>
+
+
+
+
+
+</html>
