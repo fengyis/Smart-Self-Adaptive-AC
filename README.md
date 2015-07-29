@@ -2,7 +2,7 @@
 
 ##[Visit our website!](https://smartac.parseapp.com)
 
-##1.Raspberry Pi Bluetooth Discovery
+##1.Smart Self-Adaptive Air Conditioner
 
 1)This folder contains the python programm running on raspberry pi with linux operating system. The raspberry pi has to be equiped with bluetooth dongle and wifi module. Its purpose is to utilize bluetooth to detect the number of bluetooth devices within its range.
 
